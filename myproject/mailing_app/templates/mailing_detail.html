@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Детали рассылки</h2>
+  <!-- Отображение деталей рассылки -->
+  <p>Время рассылки: {{ mailing.send_time }}</p>
+  <p>Периодичность: {{ mailing.frequency }}</p>
+  <p>Статус: {{ mailing.status }}</p>
+  <!-- Ссылки на редактирование и удаление рассылки -->
+  <a href="{% url 'mailing-update' mailing.pk %}">Редактировать</a>
+  <a href="{% url 'mailing-delete' mailing.pk %}">Удалить</a>
+  <a href="{% url 'mailing-list' %}">Вернуться к списку рассылок</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Редактирование сообщения для рассылки{% else %}Создание сообщения для рассылки{% endif %}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+  </form>
+  <a href="{% url 'mailingmessage-list' %}">Вернуться к списку сообщений для рассылки</a>
+{% endblock %}

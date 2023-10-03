@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Список рассылок</h2>
+  <!-- Отображение списка рассылок -->
+  <ul>
+    {% for mailing in mailings %}
+      <li>{{ mailing.send_time }} - {{ mailing.frequency }} - {{ mailing.status }}</li>
+    {% endfor %}
+  </ul>
+  <!-- Ссылка на страницу создания рассылки -->
+  <a href="{% url 'mailing-create' %}">Создать рассылку</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Детали клиента</h2>
+  <!-- Отображение деталей клиента -->
+  <p>Имя: {{ client.full_name }}</p>
+  <p>Email: {{ client.email }}</p>
+  <p>Комментарий: {{ client.comment }}</p>
+  <!-- Ссылки на редактирование и удаление клиента -->
+  <a href="{% url 'client-update' client.pk %}">Редактировать</a>
+  <a href="{% url 'client-delete' client.pk %}">Удалить</a>
+  <a href="{% url 'client-list' %}">Вернуться к списку клиентов</a>
+{% endblock %}

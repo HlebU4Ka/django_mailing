@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Список сообщений для рассылки</h2>
+  <!-- Отображение списка сообщений для рассылки -->
+  <ul>
+    {% for message in mailingmessages %}
+      <li>{{ message.subject }}</li>
+    {% endfor %}
+  </ul>
+  <!-- Ссылка на страницу создания сообщения для рассылки -->
+  <a href="{% url 'mailingmessage-create' %}">Создать сообщение для рассылки</a>
+{% endblock %}
