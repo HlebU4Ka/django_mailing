@@ -1,16 +1,17 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from myproject.mail.forms import ClientForm, SettingMailForm, MailingForm
-from myproject.mail.models import Client, SettingMail, Mailing, Log
+from mail.forms import ClientForm, SettingMailForm, MailingForm
+from mail.models import Client, SettingMail, Mailing, Log
 from django.contrib.auth.mixins import LoginRequiredMixin
-from myproject.mail.service import random_blog, get_cached_count_mailing, get_cached_count_active, get_cached_count_client
+from mail.service import random_blog, get_cached_count_mailing, get_cached_count_active, get_cached_count_client
 
 
 class ListMixin:
     """
     Миксин для ограничения видимости объектов
     """
+
     def get_queryset(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return super().get_queryset().all()
@@ -19,10 +20,10 @@ class ListMixin:
 
 
 class CreateMixin:
-
     """
     Миксин для указания владельца
     """
+
     def form_valid(self, form):
         self.object = form.save()
         self.object.owner = self.request.user
@@ -68,7 +69,6 @@ class SettingMailCreateView(LoginRequiredMixin, CreateMixin, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-
 
 
 class SettingUpdateView(LoginRequiredMixin, UpdateView):

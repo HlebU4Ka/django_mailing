@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-from myproject.users.models import User
+from users.models import User
 
 class Command(BaseCommand):
 

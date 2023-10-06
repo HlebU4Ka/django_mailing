@@ -1,6 +1,6 @@
-from myproject.mail.apps import MailConfig
+from mail.apps import MailConfig
 from django.urls import path
-from myproject.mail.views import ClientListView, ClientCreateView, SettingMailListView, SettingMailCreateView, ClientUpdateView, \
+from mail.views import ClientListView, ClientCreateView, SettingMailListView, SettingMailCreateView, ClientUpdateView, \
     SettingUpdateView, ClientDeleteView, MailingCreateView, MailingListView, MailingUpdateView, SettingMailDeleteView, \
     MailingDeleteView, LogListView, title
 

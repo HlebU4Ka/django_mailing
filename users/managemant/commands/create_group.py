@@ -1,8 +1,8 @@
 from django.core.management import BaseCommand
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
-from myproject.users.models import User
-from myproject.mail.models import Mailing, SettingMail, Client
+from users.models import User
+from mail.models import Mailing, SettingMail, Client
 
 
 class Command(BaseCommand):

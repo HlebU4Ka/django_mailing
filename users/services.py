@@ -1,7 +1,7 @@
 import random
 import string
-from myproject.users.models import User
-from django.contrib.auth.models import Group, Permission
+from users.models import User
+
 
 def generate_random_key():
     characters = string.ascii_letters + string.digits

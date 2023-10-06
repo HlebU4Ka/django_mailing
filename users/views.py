@@ -2,14 +2,14 @@ import os
 
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
-from myproject.mail.service import _send_mail
+from mail.service import _send_mail
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
-from myproject.users.forms import UserRegisterForm, LoginForm, UserProfiledFrom
-from myproject.users.services import generate_random_key
+from users.forms import UserRegisterForm, LoginForm, UserProfiledFrom
+from users.services import generate_random_key
 from config import Config
-from myproject.users.models import User
+from users.models import User
 
 config = Config(".env")
 

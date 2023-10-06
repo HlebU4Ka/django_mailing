@@ -1,9 +1,9 @@
 from django.contrib.auth.views import LogoutView
-from myproject.users.apps import UsersConfig
+from users.apps import UserConfig
 from django.urls import path
-from myproject.users.views import RegisterView, ProfileView, verification, forgotten_password, UserLoginView
+from users.views import RegisterView, ProfileView, verification, forgotten_password, UserLoginView
 
-app_name = UsersConfig.name
+app_name = UserConfig.name
 
 
 urlpatterns = [

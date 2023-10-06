@@ -1,10 +1,10 @@
-from myproject.mail.models import Mailing, Log, SettingMail, Client
-from myproject.blog.models import Blog
+from mail.models import Mailing, Log, SettingMail, Client
+from blog.models import Blog
 from django.core.mail import send_mail
 from django.conf import settings
 import datetime
 from django.core.cache import cache
-from myproject.users.models import User
+from users.models import User
 
 
 def _send_mail(subject: str, text: str, mail: list) -> None:
