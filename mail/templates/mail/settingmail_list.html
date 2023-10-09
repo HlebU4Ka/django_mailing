@@ -25,7 +25,7 @@
                 <td> {{object.status}}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{% url 'mail:edit_setting' object.pk %}"
+                        <a href="{% url 'mail:update_setting' object.pk %}"
                            class="btn btn-sm btn-outline-dark">Редактировать</a>
                         <a href="{% url 'mail:delete_setting' object.pk %}"
                            class="btn btn-sm btn-outline-dark">Удалить</a>

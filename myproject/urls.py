@@ -20,11 +20,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from users.views import users_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),  # Пример подключения урлов из приложения blog
     path('mail/', include('mail.urls')),  # Пример подключения урлов из приложения mail
+    path('users/', users_view, name='users'), # Cтраница Юзера
     path('users/', include('users.urls')),  # Подключаем урлы из приложения users
 ]
 

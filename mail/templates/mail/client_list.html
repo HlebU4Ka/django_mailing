@@ -25,9 +25,9 @@
                 <td> {{object.comment | truncatechars:20}}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{% url 'mail:edit_client' object.pk %}"
+                        <a href="{% url 'mail:client_update' object.pk %}"
                            class="btn btn-sm btn-outline-dark">Редактировать</a>
-                        <a href="{% url 'mail:delete_client' object.pk %}"
+                        <a href="{% url 'mail:client_delete' object.pk %}"
                            class="btn btn-sm btn-outline-dark">Удалить</a>
                     </div>
                 </td>

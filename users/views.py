@@ -1,5 +1,5 @@
 import os
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView
 from mail.service import _send_mail
 from django.urls import reverse_lazy
@@ -8,6 +8,7 @@ from users.forms import UserRegisterForm, LoginForm, UserProfiledFrom
 from users.services import generate_random_key
 from config import Config
 from users.models import User
+
 
 config = Config(".env")
 
@@ -34,6 +35,7 @@ class RegisterView(CreateView):
 class ProfileView(UpdateView):
     model = User
     form_class = UserProfiledFrom
+    template_name = 'users/user_form.html'
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
@@ -49,10 +51,18 @@ def verification(request):
     return redirect('users:login')
 
 
-def forgotten_password(request):
+class PasswordResetForm:
     pass
+
+
+def forgotten_password(request):
+    return render(request, 'users/forgotten_password.html')
 
 
 class UserLoginView(LoginView):
     form_class = LoginForm
+    template_name = 'users/login.html'
 
+
+def users_view(request):
+    return render(request, 'mail/client_list.html')

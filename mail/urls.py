@@ -23,7 +23,6 @@ from .views import (
 app_name = MailConfig.name
 
 urlpatterns = [
-    path('client/', ClientListView.as_view(), name='client_list'),
     path('client/', views.ClientListView.as_view(), name='client'),
     path('client/create/', ClientCreateView.as_view(), name='client_create'),
     path('client/<int:pk>/update/', ClientUpdateView.as_view(), name='client_update'),
@@ -41,10 +40,4 @@ urlpatterns = [
 
     path('log/', LogListView.as_view(), name='log_list'),
     path('', title, name='home'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('profile/', ProfileView.as_view(), name='profile'),
-    path('verification/', verification, name='verification'),
-    path('forgotten_password/', forgotten_password, name='forgotten_password'),
-    path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
 ]
