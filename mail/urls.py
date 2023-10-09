@@ -1,29 +1,50 @@
 from mail.apps import MailConfig
 from django.urls import path
-from mail.views import ClientListView, ClientCreateView, SettingMailListView, SettingMailCreateView, ClientUpdateView, \
-    SettingUpdateView, ClientDeleteView, MailingCreateView, MailingListView, MailingUpdateView, SettingMailDeleteView, \
-    MailingDeleteView, LogListView, title
+from django.contrib.auth.views import LogoutView
+from users.views import RegisterView, verification, forgotten_password, UserLoginView, ProfileView
+from . import views
+from .views import (
+    ClientCreateView,
+    ClientListView,
+    ClientUpdateView,
+    ClientDeleteView,
+    SettingMailListView,
+    SettingMailCreateView,
+    SettingUpdateView,
+    SettingMailDeleteView,
+    MailingListView,
+    MailingCreateView,
+    MailingUpdateView,
+    MailingDeleteView,
+    LogListView,
+    title,
+)
 
 app_name = MailConfig.name
 
 urlpatterns = [
+    path('client/', ClientListView.as_view(), name='client_list'),
+    path('client/', views.ClientListView.as_view(), name='client'),
+    path('client/create/', ClientCreateView.as_view(), name='client_create'),
+    path('client/<int:pk>/update/', ClientUpdateView.as_view(), name='client_update'),
+    path('client/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_delete'),
+
+    path('settings/', SettingMailListView.as_view(), name='list_setting'),
+    path('settings/create/', SettingMailCreateView.as_view(), name='create_setting'),
+    path('settings/<int:pk>/update/', SettingUpdateView.as_view(), name='update_setting'),
+    path('settings/<int:pk>/delete/', SettingMailDeleteView.as_view(), name='delete_setting'),
+
+    path('mail/', MailingListView.as_view(), name='list_mail'),
+    path('mail/create/', MailingCreateView.as_view(), name='create_mail'),
+    path('mail/<int:pk>/update/', MailingUpdateView.as_view(), name='update_mail'),
+    path('mail/<int:pk>/delete/', MailingDeleteView.as_view(), name='delete_mail'),
+
+    path('log/', LogListView.as_view(), name='log_list'),
     path('', title, name='home'),
-
-    path('client', ClientListView.as_view(), name='client'),
-    path('create_client/', ClientCreateView.as_view(), name='create_client'),
-    path('edit/<int:pk>', ClientUpdateView.as_view(), name='edit_client'),
-    path('delete/<int:pk>', ClientDeleteView.as_view(), name='delete_client'),
-
-    path('list_setting/', SettingMailListView.as_view(), name='list_setting'),
-    path('create_setting/', SettingMailCreateView.as_view(), name="create_setting"),
-    path('list_setting/edit/<int:pk>', SettingUpdateView.as_view(), name='edit_setting'),
-    path('list_setting/delete/<int:pk>', SettingMailDeleteView.as_view(), name='delete_setting'),
-
-    path('list_mail/', MailingListView.as_view(), name='list_mail'),
-    path('create_mail/', MailingCreateView.as_view(), name="create_mail"),
-    path('list_mail/edit/<int:pk>', MailingUpdateView.as_view(), name='edit_mail'),
-    path('list_mail/delete/<int:pk>', MailingDeleteView.as_view(), name='delete_mail'),
-
-    path('list_log/', LogListView.as_view(), name='list_log'),
-
+    path('register/', RegisterView.as_view(), name='register'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('verification/', verification, name='verification'),
+    path('forgotten_password/', forgotten_password, name='forgotten_password'),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

@@ -9,10 +9,11 @@ from users.models import User
 
 def _send_mail(subject: str, text: str, mail: list) -> None:
     send_mail(
-        subject,
-        text,
-        settings.EMAIL_HOST_USER,
-        [mail]
+        subject=subject,
+        message=text,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[mail],
+        fail_silently=False
     )
 
 

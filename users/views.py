@@ -1,11 +1,9 @@
 import os
-
 from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView
 from mail.service import _send_mail
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-
 from users.forms import UserRegisterForm, LoginForm, UserProfiledFrom
 from users.services import generate_random_key
 from config import Config
@@ -57,3 +55,4 @@ def forgotten_password(request):
 
 class UserLoginView(LoginView):
     form_class = LoginForm
+

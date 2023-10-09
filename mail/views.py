@@ -5,6 +5,9 @@ from mail.forms import ClientForm, SettingMailForm, MailingForm
 from mail.models import Client, SettingMail, Mailing, Log
 from django.contrib.auth.mixins import LoginRequiredMixin
 from mail.service import random_blog, get_cached_count_mailing, get_cached_count_active, get_cached_count_client
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.http import HttpResponse
 
 
 class ListMixin:
@@ -38,8 +41,11 @@ class ClientCreateView(LoginRequiredMixin, CreateMixin, CreateView):
     success_url = reverse_lazy('mail:client')
 
 
+@method_decorator(login_required, name='dispatch')
 class ClientListView(ListMixin, ListView):
     model = Client
+    template_name = 'mail/client_list.html'
+    context_object_name = 'clients'
 
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
@@ -121,3 +127,7 @@ def title(request):
                'count_active': len(get_cached_count_active()),
                'count_client': len(get_cached_count_client())}
     return render(request, 'mail/home.html', context=context)
+
+
+def users_home():
+    return HttpResponse("Welcome to the users home page.")

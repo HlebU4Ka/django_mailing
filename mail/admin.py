@@ -1,6 +1,5 @@
 from django.contrib import admin
 from mail.models import Client, Mailing, SettingMail, Log
-# Register your models here.
 
 
 # Register your models here.

@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from blog.models import Blog
-
+from django.shortcuts import render
 
 # Create your views here.
 
@@ -35,3 +35,6 @@ class BlogDeleteView(DeleteView):
 class BlogUpdateView(UpdateView):
     model = Blog
     success_url = reverse_lazy('blog:blog')
+
+def users_home(request):
+    return render(request, 'mail/home.html')

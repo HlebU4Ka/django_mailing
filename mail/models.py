@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings
+from users.models import User, CustomUser
 
 # Create your models here.
 
@@ -11,8 +11,8 @@ class Client(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='фио')
     comment = models.TextField(**NULLABLE, verbose_name='комментарий')
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
-                              verbose_name='владелец')
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL,
+                              **NULLABLE, verbose_name='владелец')
 
     def __str__(self):
         return f'{self.email}'
@@ -35,8 +35,8 @@ class SettingMail(models.Model):
     period = models.PositiveIntegerField(choices=choice_period, verbose_name='периодичность')
     status = models.BooleanField(default=False, verbose_name='статус')
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
-                              verbose_name='владелец')
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL,
+                              **NULLABLE, verbose_name='владелец')
 
     def __str__(self):
         return f'{self.mailing_time}, {self.period}, {self.status}'
@@ -52,8 +52,8 @@ class Mailing(models.Model):
     subject = models.TextField(default='no subject', verbose_name='тема')
     text = models.TextField(verbose_name='текст')
 
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
-                              verbose_name='владелец')
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL,
+                              **NULLABLE, verbose_name='владелец')
 
     def __str__(self):
         return f'{self.subject}, {self.text}'
@@ -67,7 +67,7 @@ class Log(models.Model):
     mail = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='сообщение')
     setting = models.ForeignKey(SettingMail, on_delete=models.CASCADE, verbose_name='настройки', **NULLABLE)
 
-    date_last_try = models.DateTimeField(verbose_name='время последний попытки')
+    date_last_try = models.DateTimeField(verbose_name='время последней попытки')
     status_try = models.CharField(max_length=50, verbose_name='статус')
     answer = models.TextField(**NULLABLE, verbose_name='ответ')
 
@@ -77,3 +77,19 @@ class Log(models.Model):
     class Meta:
         verbose_name = 'лог'
         verbose_name_plural = 'логи'
+
+
+class MailingList(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название рассылки')
+
+    def __str__(self):
+        return self.name
+
+
+# Модель сообщений
+class Message(models.Model):
+    subject = models.CharField(max_length=255, verbose_name='Тема сообщения')
+    body = models.TextField(verbose_name='Текст сообщения')
+
+    def __str__(self):
+        return self.subject
